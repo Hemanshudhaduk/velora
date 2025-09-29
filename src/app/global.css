@@ -1,0 +1,22 @@
+/* .helpSubmitButton {
+  color: #ffffff;
+  background-color: #099250;
+  width: 480px;
+  text-transform: none;
+
+  &:hover {
+    background-color: #099250;
+  }
+}
+
+.textFieldWidth {
+  width: 480px;
+} */
+
+@font-face {
+  font-family: Inter;
+  font-style: normal;
+  font-weight: 100 900;
+  font-display: swap;
+  src: url("/fonts/InterVariable.woff2") format("woff2");
+}

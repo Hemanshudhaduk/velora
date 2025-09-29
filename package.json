@@ -1,0 +1,57 @@
+{
+  "name": "BookingEngine.HolistikahUI",
+  "version": "2.0.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev -p 4900",
+    "build": "next build",
+    "start": "next start",
+    "lint": "next lint",
+    "format:fix": "prettier --write --ignore-path .gitignore ."
+  },
+  "engines": {
+    "node": ">=16.0.0",
+    "npm": ">=8.0.0"
+  },
+  "dependencies": {
+    "@azure/msal-browser": "^2.33.0",
+    "@contentful/rich-text-html-renderer": "^16.3.5",
+    "@emotion/react": "latest",
+    "@emotion/server": "latest",
+    "@emotion/styled": "^11.11.0",
+    "@mui/icons-material": "^5.15.15",
+    "@mui/lab": "^5.0.0-alpha.125",
+    "@mui/material": "^5.15.15",
+    "@mui/x-date-pickers": "^5.0.20",
+    "@reduxjs/toolkit": "^1.9.3",
+    "autosuggest-highlight": "^3.3.4",
+    "axios": "^1.2.5",
+    "contentful": "^10.9.3",
+    "i18next": "^22.4.9",
+    "isomorphic-dompurify": "^1.9.0",
+    "lodash": "^4.17.21",
+    "moment": "^2.29.4",
+    "moment-timezone": "^0.5.44",
+    "next": "^14.2.3",
+    "next-intl": "2.15.0-beta.3",
+    "react": "18.2.0",
+    "react-dom": "18.2.0",
+    "react-hook-form": "^7.48.2",
+    "react-i18next": "^12.1.4",
+    "react-material-ui-carousel": "^3.4.2",
+    "react-phone-input-2": "^2.15.1",
+    "react-promise-tracker": "^2.1.1",
+    "react-redux": "^8.0.5",
+    "redux-logger": "^3.0.6",
+    "sass": "^1.69.5",
+    "sharp": "^0.33.4",
+    "styled-components": "^6.1.6"
+  },
+  "devDependencies": {
+    "eslint": "8.57.0",
+    "eslint-config-next": "14.0.1",
+    "eslint-config-prettier": "^9.0.0",
+    "eslint-plugin-prettier": "^5.0.1",
+    "prettier": "^3.1.0"
+  }
+}

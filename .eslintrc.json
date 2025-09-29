@@ -1,0 +1,16 @@
+{
+  "extends": ["next/core-web-vitals", "prettier"],
+  "plugins": ["prettier"],
+  "rules": {
+    "array-callback-return": "error",
+    "eqeqeq": "error",
+    "handle-callback-err": "error",
+    "no-eval": "error",
+    "no-sync": "error",
+    "no-var": "error",
+    "prefer-const": "error",
+    "react/prop-types": "off",
+    "one-var": ["error", "never"],
+    "no-useless-escape": "off"
+  }
+}
