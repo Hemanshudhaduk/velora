@@ -42,6 +42,7 @@ function SignUpTemplate(props) {
   const [isPhoneError, setIsPhoneError] = useState(false);
   const [phoneInput, setPhoneInput] = useState(false);
   const [phoneValue, setPhoneValue] = useState("+91");
+  const [dialCode, setDialCode] = useState("");
   const [successFullRegistration, setSuccessFullRegistration] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
@@ -73,14 +74,20 @@ function SignUpTemplate(props) {
   const handlePhoneChange = (value, country) => {
     setPhoneInput(true);
     setPhoneValue(value);
+    setDialCode(country?.dialCode || "");
     setValue("phone", value);
 
     // Remove all non-digit characters except the plus sign
     const cleanPhone = value.replace(/[^\d]/g, "");
     
-    // Check if we have at least country code + 10 digits
-    // For India (+91), total should be at least 12 digits (91 + 10 digits)
-    if (cleanPhone.length < 10) {
+    // Remove country dial code if present for validation
+    const normalizedDial = (country?.dialCode || "").toString();
+    const localPart = cleanPhone.startsWith(normalizedDial)
+      ? cleanPhone.slice(normalizedDial.length)
+      : cleanPhone;
+
+    // Validate at least 10 digits in the local part
+    if (localPart.length < 10) {
       setPhoneError("Please enter a valid phone number");
       setIsPhoneError(true);
       setPhoneValidate(false);
@@ -119,9 +126,11 @@ function SignUpTemplate(props) {
   const onSubmit = async (data) => {
     // Clean phone number - remove everything except digits
     const cleanPhoneNumber = phoneValue.replace(/[^\d]/g, "");
-    
-    // Remove country code (first 1-4 digits like 91 for India)
-    const phoneWithoutCountryCode = cleanPhoneNumber.replace(/^\d{1,4}/, "");
+    // Remove exact selected country dial code only
+    const normalizedDial = (dialCode || "").toString();
+    const phoneWithoutCountryCode = cleanPhoneNumber.startsWith(normalizedDial)
+      ? cleanPhoneNumber.slice(normalizedDial.length)
+      : cleanPhoneNumber;
 
     // Phone Validation
     if (!phoneInput || !phoneValidate || phoneWithoutCountryCode.length < 10) {

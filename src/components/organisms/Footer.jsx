@@ -30,7 +30,7 @@ function Footer(props) {
   return (
     <footer
       style={{
-        backgroundColor: "#084C2E",
+        backgroundColor: "#111",
       }}
     >
       <FooterFeatureSecStyle>
@@ -45,8 +45,8 @@ function Footer(props) {
               </MuiTypography>
             </Grid>
             <Grid item lg={3} sm={6} xs={12} textAlign={{ xs: "left", sm: "right" }}>
-              <Button href="/practitioner" variant="contained" color="primary">
-                {t("learnMore")}
+              <Button href="/" variant="contained" color="primary">
+                {t("explore")}
               </Button>
             </Grid>
           </Grid>
@@ -58,8 +58,8 @@ function Footer(props) {
           <Grid container spacing={{ xs: 8, sm: 4, md: 6, lg: 8 }} alignItems="flex-start">
             <Grid item xs={12} md={3.25}>
               <CustomImgStyle
-                src={`${blobUrl}/Holistikah/Logo/logo-white.svg`}
-                alt="holistikah_logo"
+                src={`/images/logos/image-1.svg`}
+                alt="velora_logo"
                 fill={true}
                 sx={{ marginBottom: "2rem", maxWidth: "9.5625rem" }}
               />
@@ -152,7 +152,7 @@ function Footer(props) {
       <FooterWorldOfHolistikaStyle>
         <ContainerStyle>
           <MuiTypography color={palette.text.secondaryContrast} variant="body1">
-            {t("footer.worldOfHolistika")}
+            © 2025 Velora — All rights reserved
           </MuiTypography>
         </ContainerStyle>
       </FooterWorldOfHolistikaStyle>

@@ -3,7 +3,7 @@ export const companyDetails = {
   id: 1,
   redirectTo: "/",
   Image: "/images/logos/image-1.svg",
-  alt: "Holistikah",
+  alt: "Velora",
 };
 
 export const Languages = [

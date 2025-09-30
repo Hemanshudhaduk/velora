@@ -1,5 +1,6 @@
 const API_URL = process.env.NEXT_PUBLIC_API_URL;
 const TOKEN_API_URL = process.env.NEXT_PUBLIC_TOKEN_API_URL;
+const SIGNUP_BASE_URL = process.env.NEXT_PUBLIC_SIGNUP_URL || API_URL;
 
 const EndPoints = {
   homeModule: {
@@ -16,7 +17,10 @@ const EndPoints = {
     getTopicDetails: `${API_URL}Holipedia/GetTopicDetailsWithSymptomListByTopicGUID`,
   },
   signUp: {
-    customerSignUp: `http://localhost:3000/api/auth/register`,
+    customerSignUp: `${SIGNUP_BASE_URL}api/auth/register`,
+  },
+  signIn: {
+    customerLogin: `${SIGNUP_BASE_URL}api/auth/login`,
   },
   activityModule: {
     showOtherStartDates: `${API_URL}Activities/ShowHolistikahOtherStartDates`,

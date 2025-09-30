@@ -3,9 +3,9 @@ import { UserSliceData } from "@/src/api/user";
 import { accountMenu } from "@/src/constants";
 import { selectUser, selectUserDetail, userDetail } from "@/src/lib/slice/userSlice";
 import { changePassword, redirectToSignIn, signOut } from "@/src/utils";
-import { AccountCircleOutlined, Launch } from "@mui/icons-material";
+import { AccountCircleOutlined, Close, Launch } from "@mui/icons-material";
 import MenuIcon from "@mui/icons-material/Menu";
-import { Button, Divider, MenuItem, Typography as MuiTypography } from "@mui/material";
+import { Box, Button, Divider, IconButton, MenuItem, Typography as MuiTypography } from "@mui/material";
 import { useTranslations } from "next-intl";
 import { usePathname, useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
@@ -15,6 +15,8 @@ import CompanyLogo from "./CompanyLogo";
 import LangSwitch from "./LangSwitch";
 import LocationDropDown from "./LocationDropDown";
 import SearchBox from "./SearchBox";
+import Addtocart from "./Addtocart";
+import LikeProduct from "./LikeProduct";
 
 const MobileMenuDrawer = props => {
   const { userLocation } = props;
@@ -51,14 +53,27 @@ const MobileMenuDrawer = props => {
 
   return (
     <>
-      <Button sx={{display:{xs : "block", md: "none" }}} aria-controls="Menu" onClick={() => showDrawer && handleCloseDrawerToggle()}>
-        <CompanyLogo />
-      </Button>
-      <Button sx={{display:{xs : "block", md: "none" }}} aria-controls="Menu" onClick={handleDrawerToggle}>
-        <MenuIcon />
-        {/* <MuiTypography>{t("menu")}</MuiTypography> */}
-      </Button>
+      {/* Mobile top bar: logo on left, actions on right */}
+      <Box sx={{ display: { xs: "flex", md: "none" }, alignItems: "center", justifyContent: "space-between", width: "100%" }}>
+        <Button aria-controls="Menu" onClick={() => showDrawer && handleCloseDrawerToggle()}>
+          <CompanyLogo />
+        </Button>
+        <Box sx={{ display: "flex", alignItems: "center" }}>
+          <LikeProduct iconFirst="True" handleCloseDrawerToggle={handleCloseDrawerToggle} />
+          <Addtocart iconFirst="True" handleCloseDrawerToggle={handleCloseDrawerToggle} />
+          <Button aria-controls="Menu" onClick={handleDrawerToggle}>
+            <MenuIcon />
+          </Button>
+        </Box>
+      </Box>
+
       <MobileNavDrawerStyle anchor="right" open={showDrawer} onClose={handleCloseDrawerToggle} elevation={0}>
+        {/* Drawer header with close button only (no duplicate logo) */}
+        <Box sx={{ display: "flex", alignItems: "center", justifyContent: "flex-end", mb: 1 }}>
+          <IconButton onClick={handleCloseDrawerToggle} aria-label="Close menu">
+            <Close />
+          </IconButton>
+        </Box>
         {/* Removed navigationRoutes mapping - these were the 4 items you wanted to remove */}
         
         <MenuItem>

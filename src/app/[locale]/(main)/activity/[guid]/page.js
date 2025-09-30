@@ -8,7 +8,9 @@ export async function generateMetadata({ params }) {
   const { guid, locale } = params;
   const activitySeoDetails = await GetActivitySeoDetails(guid, locale);
   const titleObject = {};
-  let mapTopicDetail = activitySeoDetails?.data?.activityTopicSeoDetails?.map(item => item.name);
+  // Ensure we always work with an array to avoid undefined length/index errors
+  let mapTopicDetail =
+    activitySeoDetails?.data?.activityTopicSeoDetails?.map(item => item?.name)?.filter(Boolean) || [];
   titleObject.title = `${activitySeoDetails?.data?.activityProvideSeoDetails[0]?.name} ${
     activitySeoDetails?.data?.activityProvideSeoDetails[0]?.activityBookingType === "In-Person"
       ? `& ${t("in")} ${activitySeoDetails?.data?.activityProvideSeoDetails[0]?.activityCity}`
@@ -33,8 +35,8 @@ export async function generateMetadata({ params }) {
         : ""
     }! ${t("topicDescription1")} ${mapTopicDetail?.join(" and ")}.`;
   } else if (
-    activitySeoDetails?.data?.activityTopicSeoDetails?.length >= 3 &&
-    activitySeoDetails?.data?.activityTopicSeoDetails?.length <= 6
+    (activitySeoDetails?.data?.activityTopicSeoDetails?.length ?? mapTopicDetail.length) >= 3 &&
+    (activitySeoDetails?.data?.activityTopicSeoDetails?.length ?? mapTopicDetail.length) <= 6
   ) {
     titleObject.description = `${t("topicDescription")} ${
       activitySeoDetails?.data?.activityProvideSeoDetails[0]?.activityBookingType === "In-Person"
@@ -44,15 +46,22 @@ export async function generateMetadata({ params }) {
       mapTopicDetail[mapTopicDetail?.length - 1]
     }.`;
   } else {
-    titleObject.description = `${t("topicDescription1")} ${mapTopicDetail
-      ?.slice(0, mapTopicDetail?.length - 1)
-      ?.join(", ")} ${t("and")} ${mapTopicDetail[mapTopicDetail?.length - 1]}.`;
+    // Fallback for any other length; guard against empty array
+    if (mapTopicDetail.length === 0) {
+      titleObject.description = `${t("topicDescription")}`;
+    } else if (mapTopicDetail.length === 1) {
+      titleObject.description = `${t("topicDescription1")} ${mapTopicDetail[0]}.`;
+    } else {
+      titleObject.description = `${t("topicDescription1")} ${mapTopicDetail
+        .slice(0, mapTopicDetail.length - 1)
+        .join(", ")} ${t("and")} ${mapTopicDetail[mapTopicDetail.length - 1]}.`;
+    }
   }
   titleObject.metadataBase = new URL("https://holistickah.com/en/activity");
   const seoTemplate = SeoTemplate(titleObject);
   if (mapTopicDetail?.length < 10) {
-    const mapSymptomDetails = activitySeoDetails?.data?.activitySymptomSeoDetails?.map(item => item.name);
-    const sliceSymptomData = mapSymptomDetails?.slice(0, 10 - mapTopicDetail?.length - 1);
+    const mapSymptomDetails = activitySeoDetails?.data?.activitySymptomSeoDetails?.map(item => item?.name)?.filter(Boolean);
+    const sliceSymptomData = mapSymptomDetails?.slice(0, 10 - mapTopicDetail.length - 1) || [];
     mapTopicDetail = mapTopicDetail.concat(sliceSymptomData).join(", ");
   }
   return {

@@ -1,6 +1,6 @@
 export const AboutUsImages = {
-  url: `${process.env.NEXT_PUBLIC_BLOB_IMAGE_MEDIA_URL}/Holistikah/AboutUsPage/aboutUs.png`,
-  alt: "Holistikah_aboutUs_Image",
+  url: `/images/Main_image_2.jpg`,
+  alt: "Velora_aboutUs_Image",
 };
 
 export const AboutUSGrid1 = [

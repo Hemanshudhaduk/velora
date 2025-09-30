@@ -5,12 +5,23 @@ import { Drawer, Menu, MenuItem, MenuList, styled } from "@mui/material";
 import { CustomLink } from "../atoms";
 
 export const LogoLinkStyle = styled(CustomLink)(() => ({
-  "& img[alt='Holistikah']": {
+  display: "inline-flex",
+  alignItems: "center",
+  "& img": {
     position: "unset !important",
-    maxHeight: "32px",
-    maxWidth: "155px",
-    minWidth: "153px",
+    height: "44px",
+    width: "auto",
     objectFit: "contain",
+  },
+  "@media screen and (max-width:1199px)": {
+    "& img": {
+      height: "40px",
+    },
+  },
+  "@media screen and (max-width:767px)": {
+    "& img": {
+      height: "32px",
+    },
   },
 }));
 

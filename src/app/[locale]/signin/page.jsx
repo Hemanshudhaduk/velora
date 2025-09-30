@@ -1,15 +1,12 @@
 "use client";
-import { signIn } from "@/src/utils";
-import { useEffect } from "react";
-import FuseSplashScreen from "../auth/fuseSplashScreen";
+import { CustomerLogin } from "@/src/api/user";
+import SignInTemplate from "@/src/components/templates/SignInTemplate";
 
 const SignIn = () => {
-    useEffect(() => {
-        signIn(localStorage.getItem("redirectURL"))
-    }, [])
+  const apiCalling = async formData => {
+    return await CustomerLogin(formData);
+  };
+  return <SignInTemplate apiCalling={apiCalling} />;
+};
 
-    return (
-        <div><FuseSplashScreen /></div>
-    )
-}
 export default SignIn;
